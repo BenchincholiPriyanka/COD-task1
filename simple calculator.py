@@ -1,45 +1,35 @@
 def calculator():
     while True:
-        # Print options for the user
-        print("Enter '+' to add two numbers")
-        print("Enter '-' to subtract two numbers")
-        print("Enter '*' to multiply two numbers")
-        print("Enter '/' to divide two numbers")
-        print("Enter 'quit' to end the program")
-        
-        # Get user input
-        user_input = input(": ")
+        try:
+            num1 = float(input("Enter the first number: "))
+            num2 = float(input("Enter the second number: "))
+            operator = input("Enter the operator (+, -, *, /): ")
 
-        # Check if the user wants to quit
-        if user_input == "quit":
-            break
-        # Check if the user input is a valid operator
-        elif user_input in ["+", "-", "*", "/"]:
-            # Get first number
-            num1 = float(input("Enter a number: "))
-            # Get second number
-            num2 = float(input("Enter another number: "))
-
-            # Perform the operation based on the user input
-            if user_input == "+":
+            if operator == '+':
                 result = num1 + num2
-                print(num1, "+", num2, "=", result)
-
-            elif user_input == "-":
+            elif operator == '-':
                 result = num1 - num2
-                print(num1, "-", num2, "=", result)
-
-            elif user_input == "*":
+            elif operator == '*':
                 result = num1 * num2
-                print(num1, "*", num2, "=", result)
+            elif operator == '/':
+                if num2 == 0:
+                    result = float('inf')  # positive infinity
+                else:
+                    result = num1 / num2
+            else:
+                print("Invalid operator!")
+                continue
 
-            elif user_input == "/":
-                result = num1 / num2
-                print(num1, "/", num2, "=", result)
-        else:
-            # In case of invalid input
-            print("Invalid Input")
+            print(f"Result: {result}")
+        
+        except ValueError:
+            print("Invalid input! Please enter a valid number.")
+        except ZeroDivisionError:
+            print("Division by zero is not allowed!")
 
-# Call the calculator function to start the program
+        choice = input("Do you want to perform another calculation? (yes/no): ").lower()
+        if choice != 'yes':
+            break
+
+print("Simple Calculator")
 calculator()
-
